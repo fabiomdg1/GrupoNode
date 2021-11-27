@@ -1,0 +1,48 @@
+<h1>Cadastro de Medico</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <form action="/cadastrarMedico" class="form-group" method="post">
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite o nome">
+                </div> 
+
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" name="crm" id="crm" placeholder="Digite o CRM">
+                </div>
+
+                {{!-- trocar pelo dropdown menu --}}
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" name="especialidade" id="especialidade" placeholder="especialidade">
+                </div>
+
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" name="rg" id="rg" placeholder="RG">
+                </div>
+
+                <div class="input-group mb-2">
+                    <input type="text"  class="form-control" name="cpf" id="cpf" placeholder="cpf">
+                </div>
+
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" name="url" id="url" placeholder="url">
+                </div>
+
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" name="formacao" id="formacao" placeholder="formacao">
+                </div>
+
+                <div class="input-group mb-2">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="digite o email">
+                </div>
+
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" name="telefone" id="telefone" placeholder="digite o telefone">
+                </div>
+                
+                <button type="submit" class="btn btn-success">Enviar</button>
+                <button type="reset" class="btn btn-danger">Limpar</button>
+            </form> {{!-- form --}}
+        </div> {{!-- col --}}
+    </div> {{!-- row --}}
+</div> {{!-- container --}}
