@@ -60,6 +60,9 @@ app.post('/editarMedico',(req, res)=>{
                telefone:req.body.telefone,
                formacao:req.body.formacao
     }
+
+// criarmos a newvalues setando, para forçar o obj virar um json, pois estava dando erro
+// no update não estava reconhecendo  obj como json antes
     var newvalues = { $set: obj
      }
     dbo.collection("medico").updateOne({_id:ObjectId(id)}, newvalues,(err, resultado) => {
@@ -122,7 +125,6 @@ app.get("/deletarMedico/:id", (req, res)=>{
 app.get("/cadastrarEspecialidade", (req, res) => {
     res.render("cadastrarEspecialidades")
 })
-
 
 
 app.listen(porta, () =>{
