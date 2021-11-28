@@ -40,25 +40,29 @@ app.get("/login", (req, res) => {
 
 app.get("/editarMedico/:id", (req, res) => {
     var o_id = req.params.id
-    
-    dbo.collection("medico").findOne({_id:ObjectId(o_id)}, (err, resultado) => {
-        if (err) throw err 
-        
-        res.render("editarMedico",{resultado})
+
+    dbo.collection("medico").findOne({ _id: ObjectId(o_id) }, (err, resultado) => {
+        if (err) throw err
+
+        res.render("editarMedico", { resultado })
 
     })
-        
+
 })
 
-app.post('/editarMedico',(req, res)=>{
+app.post('/editarMedico', (req, res) => {
     let id = req.body.id
-    let obj = {nome:req.body.nome,
-               crm:req.body.crm,
-               rg:req.body.rg,
-               cpf:req.body.cpf,
-               email:req.body.email,
-               telefone:req.body.telefone,
-               formacao:req.body.formacao
+    let obj = {
+        nome: req.body.nome,
+        crm: req.body.crm,
+        rg: req.body.rg,
+        cpf: req.body.cpf,
+        email: req.body.email,
+        telefone: req.body.telefone,
+        formacao: req.body.formacao
+    }
+    var newvalues = {
+        $set: obj
     }
 
 // criarmos a newvalues setando, para forçar o obj virar um json, pois estava dando erro
@@ -78,10 +82,10 @@ app.get("/cadastrarMedico", (req, res) => {
 })
 
 app.get("/listarMedico", (req, res) => {
-    dbo.collection('medico').find({}).toArray((err,resultado) => {
+    dbo.collection('medico').find({}).toArray((err, resultado) => {
         if (err) throw err
-        res.render("listaMedico",{medicos:resultado})
-        
+        res.render("listaMedico", { medicos: resultado })
+
     })
 
 })
@@ -102,7 +106,7 @@ app.post("/cadastrarMedico", (req, res) => {
         telefone: req.body.telefone,
         url: req.body.url,
         formacao: req.body.formacao,
-        data_admissao: dataAdmissao        
+        data_admissao: dataAdmissao
     }
 
     dbo.collection("medico").insertOne(obj, (err, resultado) => {
@@ -112,21 +116,78 @@ app.post("/cadastrarMedico", (req, res) => {
     })
 })
 
-app.get("/deletarMedico/:id", (req, res)=>{
+app.get("/deletarMedico/:id", (req, res) => {
     let idMedico = req.params.id
 
     const objId = new ObjectId(idMedico)
-    dbo.collection("medico").deleteOne({ _id:objId }, (erro, resultado)=>{
-        if(erro) throw erro
+    dbo.collection("medico").deleteOne({ _id: objId }, (erro, resultado) => {
+        if (erro) throw erro
         res.redirect("/listarMedico")
     })
 })
 
 app.get("/cadastrarEspecialidade", (req, res) => {
-    res.render("cadastrarEspecialidades")
+    res.render("cadastrarEspecialidade")
 })
 
+app.post('/cadastrarEspecialidade', (req, res) => {
+    let obj = {
+        nome: req.body.nome,
+        categoria: req.body.categoria,
+        codigo: req.body.codigo,
+        local: req.body.local,
+        planoSaude: req.body.planoSaude
+    }
+    dbo.collection('especialidade').insertOne(obj, (erro, resultado) => {
+        if (erro) throw erro
+        res.redirect('/listarEspecialidade')
+    })
 
-app.listen(porta, () =>{
+})
+
+app.get('/listarEspecialidade', (req, res) => {
+    dbo.collection('especialidade').find({}).toArray((erro, resultado) => {
+        if (erro) throw erro
+        res.render('listarEspecialidade', { especialidades: resultado })
+    })
+
+})
+
+app.get('/deletarEspecialidade/:id', (req, res) => {
+    let idEspecialidade = req.params.id
+    dbo.collection('especialidade').deleteOne({ _id: ObjectId(idEspecialidade) }, (erro, resultado) => {
+        if (erro) throw erro
+        res.redirect('/listarEspecialidade')
+
+    })
+})
+
+app.get('/editarEspecialidade/:id', (req, res) => {
+    let o_id = req.params.id
+    dbo.collection('especialidade').findOne({ _id: ObjectId(o_id) }, (erro, resultado) => {
+        if (erro) throw erro
+        res.render('editarEspecialidade', { especialidade: resultado })
+    })
+})
+
+app.post('/editarEspecialidade', (req, res) => {
+    let id = req.body.id
+    let obj = {
+        nome: req.body.nome,
+        categoria: req.body.categoria,
+        codigo: req.body.codigo,
+        local: req.body.local,
+        planoSaude: req.body.planoSaude
+    }
+    var newvalues = {
+        $set: obj
+    }
+    dbo.collection("especialidade").updateOne({ _id: ObjectId(id) }, newvalues, (err, resultado) => {
+        if (err) throw err
+        res.redirect('/listarEspecialidade')
+    })
+})
+
+app.listen(porta, () => {
     console.log("Sistema rodando na porta: [" + porta + "]")
 })
