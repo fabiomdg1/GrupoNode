@@ -5,7 +5,8 @@ const app = express()
 const date = require("date-and-time")
 
 const exphbs = require("express-handlebars")
-
+//chama o objedtID, sem isto o findOne nao entende
+// por isto tem que passar
 const ObjectId = require('mongodb').ObjectId
 
 const LocalStorage = require('node-localstorage').LocalStorage

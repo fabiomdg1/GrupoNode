@@ -3,6 +3,7 @@
     <div class="row">
         <div class="col-lg-6">
             <form action="/editarEspecialidade" class="form-group" method="post">
+            {{!-- puxa o objeto Id para fazer a edição na rotina editarespecialidade no app --}}
             <input type="hidden" name="id" value="{{especialidade._id}}">
                 <div class="input-group mb-2">
                     <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite o nome" value="{{especialidade.nome}}">
