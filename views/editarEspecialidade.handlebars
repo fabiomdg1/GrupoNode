@@ -1,23 +1,23 @@
-<h1>Cadastrar Especialidades</h1>
-<h1>Cadastrar Especialidades</h1>
+<h1>Editar Especialidades</h1>
 <div class="container">
     <div class="row">
         <div class="col-lg-6">
-            <form action="/cadastrarEspecialidade" class="form-group" method="post">
+            <form action="/editarEspecialidade" class="form-group" method="post">
+            <input type="hidden" name="id" value="{{especialidade._id}}">
                 <div class="input-group mb-2">
-                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite o nome">
+                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite o nome" value="{{especialidade.nome}}">
                 </div>
                 <div class="input-group mb-2">
                     <input type="text" class="form-control" name="categoria" id="categoria"
-                        placeholder="Digite a categoria">
+                        placeholder="Digite a categoria" value="{{especialidade.categoria}}">
                 </div>
                 <div class="input-group mb-2">
-                    <input type="text" class="form-control" name="codigo" id="codigo" placeholder="Código">
+                    <input type="text" class="form-control" name="codigo" id="codigo" placeholder="Código" value="{{especialidade.codigo}}">
                 </div>
                 <div>
                     <label for="local">Local</label>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="local" id="local1" value="clinica">
+                        <input class="form-check-input" type="radio" name="local" id="local1" value="clinica" checked>
                         <label class="form-check-label" for="local1">Clínica</label>
                     </div>
                     <div class="form-check form-check-inline">
@@ -28,7 +28,7 @@
                 <div>
                     <label for="planoSaude">Plano de Saúde</label>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="planoSaude" id="planoSaude1" value="sim">
+                        <input class="form-check-input" type="radio" name="planoSaude" id="planoSaude1" value="sim" checked>
                         <label class="form-check-label" for="planoSaude1">Sim</label>
                     </div>
                     <div class="form-check form-check-inline">
