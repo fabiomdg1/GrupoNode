@@ -1,0 +1,11 @@
+select da especialidade no cadastrar medico
+criar cards dos medicos
+listar medicos pro usuario
+pesquisa por medico
+pesquisa por especialidade
+toda a estilização
+restringir o user pra voltar pro login já estando logado
+navbars dinâmicas
+Vlibras
+sem footer no adm
+estilizar pagina de erro

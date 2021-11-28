@@ -8,9 +8,13 @@ const exphbs = require("express-handlebars")
 
 const ObjectId = require('mongodb').ObjectId
 
+const LocalStorage = require('node-localstorage').LocalStorage
+localStorage = new LocalStorage('./scratch')
+
 const hbs = exphbs.create({
     partialsDir: ("views/partials/")
 })
+
 
 // trazendo a conexão do conexão pra cá
 const client = require("./conexao")
@@ -33,160 +37,239 @@ app.use(express.json())
 // dizendo ao express onde os arquivos estáticos estão
 app.use(express.static(__dirname + "public"))
 
+localStorage.setItem("perfilLogado", "nulo")
+localStorage.setItem("tipoPerfil", "nulo")
 
 app.get("/login", (req, res) => {
-    res.send("entrei no home")
+    res.render("login")
+})
+
+app.post("/login", (req, res) => {
+    let login = req.body.login
+    let senha = req.body.senha
+
+    dbo.collection("Login").findOne({login:login}, (erro, resultado) => {
+        if (erro) throw erro
+        console.log(resultado)
+        if(resultado == null){
+            // não achamos o login
+            res.send("Não achamos seu login")
+        }else if(senha == resultado.senha){
+            // senha correta
+            // usando o local storage para armazenar informações do perfil logado no sistema
+            localStorage.setItem("perfilLogado", resultado.login)
+            localStorage.setItem("tipoPerfil", resultado.tipo)
+            res.redirect("/listarMedico")
+        }else{
+            // senha errada
+            res.send("Senha incorreta")
+        }
+    })
 })
 
 app.get("/editarMedico/:id", (req, res) => {
-    var o_id = req.params.id
+    let tipoPerfil = localStorage.getItem("tipoPerfil")
+    if(tipoPerfil == "user" || tipoPerfil == "nulo"){
+        res.render("erro")
+    }else{
+        var o_id = req.params.id
 
-    dbo.collection("medico").findOne({ _id: ObjectId(o_id) }, (err, resultado) => {
-        if (err) throw err
-
-        res.render("editarMedico", { resultado })
-
-    })
-
-})
+        dbo.collection("medico").findOne({ _id: ObjectId(o_id) }, (err, resultado) => {
+            if (err) throw err
+            res.render("editarMedico", { resultado })
+        })
+    }//else
+})//editarMedico
 
 app.post('/editarMedico', (req, res) => {
-    let id = req.body.id
-    let obj = {
-        nome: req.body.nome,
-        crm: req.body.crm,
-        rg: req.body.rg,
-        cpf: req.body.cpf,
-        email: req.body.email,
-        telefone: req.body.telefone,
-        formacao: req.body.formacao
-    }
-    var newvalues = {
-        $set: obj
-    }
+    let tipoPerfil = localStorage.getItem("tipoPerfil")
+    if(tipoPerfil == "user" || tipoPerfil == "nulo"){
+        res.render("erro")
+    }else{    
+        let id = req.body.id
+        let obj = {
+            nome: req.body.nome,
+            crm: req.body.crm,
+            rg: req.body.rg,
+            cpf: req.body.cpf,
+            email: req.body.email,
+            telefone: req.body.telefone,
+            formacao: req.body.formacao
+        }
+        var newvalues = {
+            $set: obj
+        }
 
-// criarmos a newvalues setando, para forçar o obj virar um json, pois estava dando erro
-// no update não estava reconhecendo  obj como json antes
-    var newvalues = { $set: obj
-     }
-    dbo.collection("medico").updateOne({_id:ObjectId(id)}, newvalues,(err, resultado) => {
-        if (err) throw err
-        res.redirect('/listarMedico')
-    })
-
-})
+        // criarmos a newvalues setando, para forçar o obj virar um json, pois estava dando erro
+        // no update não estava reconhecendo  obj como json antes
+        var newvalues = { $set: obj
+        }
+        dbo.collection("medico").updateOne({_id:ObjectId(id)}, newvalues,(err, resultado) => {
+            if (err) throw err
+            res.redirect('/listarMedico')
+        })
+    }//else
+})//editarMedico
 
 
 app.get("/cadastrarMedico", (req, res) => {
-    res.render("cadastrarMedico")
-})
+    let tipoPerfil = localStorage.getItem("tipoPerfil")
+    if(tipoPerfil == "user" || tipoPerfil == "nulo"){
+        res.render("erro")
+    }else{
+        res.render("cadastrarMedico")
+    }//else
+})//cadastrarMedico
 
 app.get("/listarMedico", (req, res) => {
-    dbo.collection('medico').find({}).toArray((err, resultado) => {
-        if (err) throw err
-        res.render("listaMedico", { medicos: resultado })
-
-    })
-
-})
+    let tipoPerfil = localStorage.getItem("tipoPerfil")
+    if(tipoPerfil == "user" || tipoPerfil == "nulo"){
+        res.render("erro")
+    }else{
+        dbo.collection('medico').find({}).toArray((err, resultado) => {
+            if (err) throw err
+            res.render("listaMedico", { medicos: resultado })
+        })
+    }//else
+})//listarMedico
 
 
 // post para inserir um novo medico no banco de dados
 app.post("/cadastrarMedico", (req, res) => {
-    const now = new Date();
-    let dataAdmissao = date.format(now, "DD/MM/YYYY")
+    let tipoPerfil = localStorage.getItem("tipoPerfil")
+    
+    if(tipoPerfil == "user" || tipoPerfil == "nulo"){
+        res.render("erro")
+    }else{
+        const now = new Date();
+        let dataAdmissao = date.format(now, "DD/MM/YYYY")
 
-    let obj = {
-        nome: req.body.nome,
-        crm: req.body.crm,
-        especialidade: req.body.especialidade,
-        rg: req.body.rg,
-        cpf: req.body.cpf,
-        email: req.body.email,
-        telefone: req.body.telefone,
-        url: req.body.url,
-        formacao: req.body.formacao,
-        data_admissao: dataAdmissao
-    }
+        let obj = {
+            nome: req.body.nome,
+            crm: req.body.crm,
+            especialidade: req.body.especialidade,
+            rg: req.body.rg,
+            cpf: req.body.cpf,
+            email: req.body.email,
+            telefone: req.body.telefone,
+            url: req.body.url,
+            formacao: req.body.formacao,
+            data_admissao: dataAdmissao
+        }
 
-    dbo.collection("medico").insertOne(obj, (err, resultado) => {
-        if (err) throw err
-        console.log("1 médico foi inserido no BD")
-        res.redirect("/login")
-    })
-})
+        dbo.collection("medico").insertOne(obj, (err, resultado) => {
+            if (err) throw err
+            console.log("1 médico foi inserido no BD")
+            res.redirect("/login")
+        })
+    }//else
+})//cadastrarMedico
 
 app.get("/deletarMedico/:id", (req, res) => {
-    let idMedico = req.params.id
+    let tipoPerfil = localStorage.getItem("tipoPerfil")
+    if(tipoPerfil == "user" || tipoPerfil == "nulo"){
+        res.render("erro")
+    }else{
+        let idMedico = req.params.id
 
-    const objId = new ObjectId(idMedico)
-    dbo.collection("medico").deleteOne({ _id: objId }, (erro, resultado) => {
-        if (erro) throw erro
-        res.redirect("/listarMedico")
-    })
-})
+        const objId = new ObjectId(idMedico)
+        dbo.collection("medico").deleteOne({ _id: objId }, (erro, resultado) => {
+            if (erro) throw erro
+            res.redirect("/listarMedico")
+        })
+    }//else
+})//deletarMedico
 
 app.get("/cadastrarEspecialidade", (req, res) => {
-    res.render("cadastrarEspecialidade")
-})
+    let tipoPerfil = localStorage.getItem("tipoPerfil")
+    if(tipoPerfil == "user" || tipoPerfil == "nulo"){
+        res.render("erro")
+    }else{
+        res.render("cadastrarEspecialidade")
+    }//else
+})//cadastrarEspecialidade
 
 app.post('/cadastrarEspecialidade', (req, res) => {
-    let obj = {
-        nome: req.body.nome,
-        categoria: req.body.categoria,
-        codigo: req.body.codigo,
-        local: req.body.local,
-        planoSaude: req.body.planoSaude
-    }
-    dbo.collection('especialidade').insertOne(obj, (erro, resultado) => {
-        if (erro) throw erro
-        res.redirect('/listarEspecialidade')
-    })
-
-})
+    let tipoPerfil = localStorage.getItem("tipoPerfil")
+    if(tipoPerfil == "user" || tipoPerfil == "nulo"){
+        res.render("erro")
+    }else{
+        let obj = {
+            nome: req.body.nome,
+            categoria: req.body.categoria,
+            codigo: req.body.codigo,
+            local: req.body.local,
+            planoSaude: req.body.planoSaude
+        }
+        dbo.collection('especialidade').insertOne(obj, (erro, resultado) => {
+            if (erro) throw erro
+            res.redirect('/listarEspecialidade')
+        })
+    }//else
+})//cadastrarEspecialidade
 
 app.get('/listarEspecialidade', (req, res) => {
-    dbo.collection('especialidade').find({}).toArray((erro, resultado) => {
-        if (erro) throw erro
-        res.render('listarEspecialidade', { especialidades: resultado })
-    })
-
-})
+    let tipoPerfil = localStorage.getItem("tipoPerfil")
+    
+    if(tipoPerfil == "user" || tipoPerfil == "nulo"){
+        res.render("erro")
+    }else{
+        dbo.collection('especialidade').find({}).toArray((erro, resultado) => {
+            if (erro) throw erro
+            res.render('listarEspecialidade', { especialidades: resultado })
+        })
+    }//else
+})//listarEspecialidade
 
 app.get('/deletarEspecialidade/:id', (req, res) => {
-    let idEspecialidade = req.params.id
-    dbo.collection('especialidade').deleteOne({ _id: ObjectId(idEspecialidade) }, (erro, resultado) => {
-        if (erro) throw erro
-        res.redirect('/listarEspecialidade')
-
-    })
-})
+    let tipoPerfil = localStorage.getItem("tipoPerfil")
+    if(tipoPerfil == "user" || tipoPerfil == "nulo"){
+        res.render("erro")
+    }else{
+        let idEspecialidade = req.params.id
+        dbo.collection('especialidade').deleteOne({ _id: ObjectId(idEspecialidade) }, (erro, resultado) => {
+            if (erro) throw erro
+            res.redirect('/listarEspecialidade')
+        })
+    }//else
+})//deletarEspecialidade
 
 app.get('/editarEspecialidade/:id', (req, res) => {
-    let o_id = req.params.id
-    dbo.collection('especialidade').findOne({ _id: ObjectId(o_id) }, (erro, resultado) => {
-        if (erro) throw erro
-        res.render('editarEspecialidade', { especialidade: resultado })
-    })
-})
+    let tipoPerfil = localStorage.getItem("tipoPerfil")
+    
+    if(tipoPerfil == "user" || tipoPerfil == "nulo"){
+        res.render("erro")
+    }else{
+        let o_id = req.params.id
+        dbo.collection('especialidade').findOne({ _id: ObjectId(o_id) }, (erro, resultado) => {
+            if (erro) throw erro
+            res.render('editarEspecialidade', { especialidade: resultado })
+        })
+    }//else
+})//editarEspecialidade
 
 app.post('/editarEspecialidade', (req, res) => {
-    let id = req.body.id
-    let obj = {
-        nome: req.body.nome,
-        categoria: req.body.categoria,
-        codigo: req.body.codigo,
-        local: req.body.local,
-        planoSaude: req.body.planoSaude
-    }
-    var newvalues = {
-        $set: obj
-    }
-    dbo.collection("especialidade").updateOne({ _id: ObjectId(id) }, newvalues, (err, resultado) => {
-        if (err) throw err
-        res.redirect('/listarEspecialidade')
-    })
-})
+    let tipoPerfil = localStorage.getItem("tipoPerfil")
+    if(tipoPerfil == "user" || tipoPerfil == "nulo"){
+        res.render("erro")
+    }else{
+        let id = req.body.id
+        let obj = {
+            nome: req.body.nome,
+            categoria: req.body.categoria,
+            codigo: req.body.codigo,
+            local: req.body.local,
+            planoSaude: req.body.planoSaude
+        }
+        var newvalues = {
+            $set: obj
+        }
+        dbo.collection("especialidade").updateOne({ _id: ObjectId(id)}, newvalues, (err, resultado) => {
+            if (err) throw err
+            res.redirect('/listarEspecialidade')
+        })
+    }//else
+})//editarEspecialidade
 
 app.listen(porta, () => {
     console.log("Sistema rodando na porta: [" + porta + "]")
