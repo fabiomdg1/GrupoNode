@@ -1,5 +1,7 @@
 const mongodb = require("mongodb").MongoClient
-const url = "mongodb+srv://lcsppaiva:2q6zspj9@cluster0.ntpfz.mongodb.net/Hospital?retryWrites=true&w=majority"
+// const url = "mongodb+srv://lcsppaiva:2q6zspj9@cluster0.ntpfz.mongodb.net/Hospital?retryWrites=true&w=majority"
+const url = "mongodb+srv://KeniaRamos:katita10@cluster0.ei4ns.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+
 
 // permite acessar as função do mongo
 const client = new mongodb(url)

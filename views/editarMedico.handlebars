@@ -1,0 +1,52 @@
+<h1>Editar Medico</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <form action="/editarMedico" class="form-group" method="post">
+                <input type="hidden" name="id" id="id" value = '{{resultado._id}}'>
+
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" name="nome" id="nome" value = '{{resultado.nome}}' >
+                </div> 
+
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" name="crm" id="crm" value = '{{resultado.crm}}'>
+                </div>
+
+                {{!-- trocar pelo dropdown menu --}}
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" name="especialidade" id="especialidade" value = '{{resultado.especialidade}}'>
+                </div>
+
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" name="rg" id="rg" value = '{{resultado.rg}}'>
+                </div>
+
+                <div class="input-group mb-2">
+                    <input type="text"  class="form-control" name="cpf" id="cpf" value = '{{resultado.cpf}}'>
+                </div>
+
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" name="url" id="url" value = '{{resultado.url}}'>
+                </div>
+
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" name="formacao" id="formacao" value = '{{resultado.formacao}}'>
+                </div>
+
+                <div class="input-group mb-2">
+                    <input type="email" class="form-control" name="email" id="email" value = '{{resultado.email}}'>
+                </div>
+
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" name="telefone" id="telefone" value = '{{resultado.telefone}}'>
+                </div>
+                
+                <button type="submit" class="btn btn-success">Enviar</button>
+                <button type="reset" class="btn btn-danger">Limpar</button>
+            </form> {{!-- form --}}
+        </div> {{!-- col --}}
+    </div> {{!-- row --}}
+</div> {{!-- container --}}
+
+

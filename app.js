@@ -6,6 +6,8 @@ const date = require("date-and-time")
 
 const exphbs = require("express-handlebars")
 
+const ObjectId = require('mongodb').ObjectId
+
 const hbs = exphbs.create({
     partialsDir: ("views/partials/")
 })
@@ -36,9 +38,51 @@ app.get("/login", (req, res) => {
     res.send("entrei no home")
 })
 
+app.get("/editarMedico/:id", (req, res) => {
+    var o_id = req.params.id
+    
+    dbo.collection("medico").findOne({_id:ObjectId(o_id)}, (err, resultado) => {
+        if (err) throw err 
+        
+        res.render("editarMedico",{resultado})
+
+    })
+        
+})
+
+app.post('/editarMedico',(req, res)=>{
+    let id = req.body.id
+    let obj = {nome:req.body.nome,
+               crm:req.body.crm,
+               rg:req.body.rg,
+               cpf:req.body.cpf,
+               email:req.body.email,
+               telefone:req.body.telefone,
+               formacao:req.body.formacao
+    }
+    var newvalues = { $set: obj
+     }
+    dbo.collection("medico").updateOne({_id:ObjectId(id)}, newvalues,(err, resultado) => {
+        if (err) throw err
+        res.redirect('/listarMedico')
+    })
+
+})
+
+
 app.get("/cadastrarMedico", (req, res) => {
     res.render("cadastrarMedico")
 })
+
+app.get("/listarMedico", (req, res) => {
+    dbo.collection('medico').find({}).toArray((err,resultado) => {
+        if (err) throw err
+        res.render("listaMedico",{medicos:resultado})
+        
+    })
+
+})
+
 
 // post para inserir um novo medico no banco de dados
 app.post("/cadastrarMedico", (req, res) => {
@@ -51,6 +95,8 @@ app.post("/cadastrarMedico", (req, res) => {
         especialidade: req.body.especialidade,
         rg: req.body.rg,
         cpf: req.body.cpf,
+        email: req.body.email,
+        telefone: req.body.telefone,
         url: req.body.url,
         formacao: req.body.formacao,
         data_admissao: dataAdmissao        
@@ -66,9 +112,6 @@ app.post("/cadastrarMedico", (req, res) => {
 app.get("/cadastrarEspecialidade", (req, res) => {
     res.render("cadastrarEspecialidades")
 })
-
-
-
 
 
 
