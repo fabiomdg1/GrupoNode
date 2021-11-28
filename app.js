@@ -109,6 +109,16 @@ app.post("/cadastrarMedico", (req, res) => {
     })
 })
 
+app.get("/deletarMedico/:id", (req, res)=>{
+    let idMedico = req.params.id
+
+    const objId = new ObjectId(idMedico)
+    dbo.collection("medico").deleteOne({ _id:objId }, (erro, resultado)=>{
+        if(erro) throw erro
+        res.redirect("/listarMedico")
+    })
+})
+
 app.get("/cadastrarEspecialidade", (req, res) => {
     res.render("cadastrarEspecialidades")
 })
