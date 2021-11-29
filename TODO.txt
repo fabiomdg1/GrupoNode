@@ -1,11 +1,18 @@
-select da especialidade no cadastrar medico
 criar cards dos medicos
 listar medicos pro usuario
-pesquisa por medico
-pesquisa por especialidade
+    pesquisa por medico
+    pesquisa por especialidade
 toda a estilização
 restringir o user pra voltar pro login já estando logado
 navbars dinâmicas
 Vlibras
 sem footer no adm
 estilizar pagina de erro
+    definir os caminhos que levam a ela
+fazer logoff
+colocar img no banco
+
+[OK]
+contar a quantidade de medicos daquela especialidade [ok]
+atualizar a quantidade de medicos na especialidade mediante a criação de um novo medico [pqp, ok]
+select da especialidade no cadastrar medico (puxar do banco) [ok]

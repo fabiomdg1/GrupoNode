@@ -45,6 +45,21 @@ app.get("/login", (req, res) => {
     res.render("login")
 })
 
+app.get("/logoff", (req, res) => {
+    localStorage.setItem("perfilLogado", "nulo")
+    localStorage.setItem("tipoPerfil", "nulo")
+    res.redirect("/login")
+})
+
+app.get("/cardsMedicos", (req, res) => {
+    let tipoPerfil = localStorage.getItem("tipoPerfil")
+    if(tipoPerfil == "nulo"){
+        res.render("erro")
+    }else{
+        res.render("cardsMedicos")
+    }
+})
+
 app.post("/login", (req, res) => {
     let login = req.body.login
     let senha = req.body.senha
@@ -60,7 +75,14 @@ app.post("/login", (req, res) => {
             // usando o local storage para armazenar informações do perfil logado no sistema
             localStorage.setItem("perfilLogado", resultado.login)
             localStorage.setItem("tipoPerfil", resultado.tipo)
-            res.redirect("/listarMedico")
+            if(resultado.tipo == "user"){
+                // logou como user, vai pros cards
+                res.redirect("/cardsMedicos")
+            }else{
+                // logou como adm, vai pro dashboard
+                res.redirect("/listarMedico")
+            }
+            
         }else{
             // senha errada
             res.send("Senha incorreta")
@@ -118,7 +140,9 @@ app.get("/cadastrarMedico", (req, res) => {
     if(tipoPerfil == "user" || tipoPerfil == "nulo"){
         res.render("erro")
     }else{
-        res.render("cadastrarMedico")
+        dbo.collection("especialidade").find({}).toArray((erro, result) => {
+            res.render("cadastrarMedico", {especialidades:result})
+        })
     }//else
 })//cadastrarMedico
 
@@ -157,12 +181,20 @@ app.post("/cadastrarMedico", (req, res) => {
             formacao: req.body.formacao,
             data_admissao: dataAdmissao
         }
-
-        dbo.collection("medico").insertOne(obj, (err, resultado) => {
-            if (err) throw err
-            console.log("1 médico foi inserido no BD")
-            res.redirect("/login")
-        })
+        // pesquisar na especialidade pra incrementar
+        dbo.collection("especialidade").findOne({nome:req.body.especialidade}, (erro, resultado) =>{
+            if (erro) throw erro
+            resultado.qtdMedicos += 1
+            let novo = {$set:resultado}
+            dbo.collection("especialidade").updateOne({_id:resultado._id}, novo, (erro, resultado) =>{
+                if(erro) throw erro
+                dbo.collection("medico").insertOne(obj, (err, resultado) => {
+                    if (err) throw err
+                    console.log("1 médico foi inserido no BD")
+                    res.redirect("/listarMedico")
+                })//insere o medico
+            })//atualiza a quantidade de medicos
+        })//pesquisa a especialidade
     }//else
 })//cadastrarMedico
 
@@ -195,16 +227,27 @@ app.post('/cadastrarEspecialidade', (req, res) => {
     if(tipoPerfil == "user" || tipoPerfil == "nulo"){
         res.render("erro")
     }else{
-        let obj = {
+        // por ql especialidade pesquisaremos
+        let especialidade = req.body.nome
+
+        // contando a quantidade de medicos que são dessa especialidade
+        // var cont = 0
+        dbo.collection("medico").countDocuments({especialidade:especialidade}, (erro, count) =>{
+            if (erro) throw erro
+            
+            let obj = {
             nome: req.body.nome,
             categoria: req.body.categoria,
             codigo: req.body.codigo,
             local: req.body.local,
-            planoSaude: req.body.planoSaude
-        }
-        dbo.collection('especialidade').insertOne(obj, (erro, resultado) => {
-            if (erro) throw erro
-            res.redirect('/listarEspecialidade')
+            planoSaude: req.body.planoSaude,
+            qtdMedicos: count 
+            }
+
+            dbo.collection('especialidade').insertOne(obj, (erro, resultado) => {
+                if (erro) throw erro
+                res.redirect('/listarEspecialidade')
+            })
         })
     }//else
 })//cadastrarEspecialidade

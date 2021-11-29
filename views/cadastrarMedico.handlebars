@@ -13,7 +13,13 @@
 
                 {{!-- trocar pelo dropdown menu --}}
                 <div class="input-group mb-2">
-                    <input type="text" class="form-control" name="especialidade" id="especialidade" placeholder="especialidade">
+                    {{!-- <input type="text" class="form-control" name="especialidade" id="especialidade" placeholder="especialidade"> --}}
+                    <select name="especialidade" class="form-select">
+                        <option selected disabled value="nill">Selecione a especialidade</option>
+                        {{#each especialidades}}
+                            <option value="{{nome}}">{{nome}}</option>
+                        {{/each}}
+                    </select>
                 </div>
 
                 <div class="input-group mb-2">
