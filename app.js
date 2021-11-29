@@ -42,7 +42,18 @@ localStorage.setItem("perfilLogado", "nulo")
 localStorage.setItem("tipoPerfil", "nulo")
 
 app.get("/login", (req, res) => {
-    res.render("login")
+    let tipoPerfil = localStorage.getItem("tipoPerfil")
+    let x = localStorage.getItem("perfilLogado")
+    if(tipoPerfil == "user"){
+        // ele já está logado como user
+        res.redirect("/cardsMedicos")
+    }else if(tipoPerfil == "adm"){
+        // ele já está logado como adm
+        res.redirect("/listarMedico")
+    }else{
+        // ele não está logado
+        res.render("login")
+    }
 })
 
 app.get("/logoff", (req, res) => {
@@ -56,7 +67,8 @@ app.get("/cardsMedicos", (req, res) => {
     if(tipoPerfil == "nulo"){
         res.render("erro")
     }else{
-        res.render("cardsMedicos")
+        let x = localStorage.getItem("perfilLogado")
+        res.render("cardsMedicos", {x})
     }
 })
 
@@ -178,7 +190,7 @@ app.post("/cadastrarMedico", (req, res) => {
             email: req.body.email,
             telefone: req.body.telefone,
             url: req.body.url,
-            formacao: req.body.formacao,
+            fo0o: req.body.formacao,
             data_admissao: dataAdmissao
         }
         // pesquisar na especialidade pra incrementar
