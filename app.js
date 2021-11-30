@@ -36,7 +36,7 @@ app.use(express.urlencoded())
 app.use(express.json())
 
 // dizendo ao express onde os arquivos estáticos estão
-app.use(express.static(__dirname + "public"))
+app.use(express.static(__dirname + "/public"))
 
 localStorage.setItem("perfilLogado", "nulo")
 localStorage.setItem("tipoPerfil", "nulo")
@@ -62,15 +62,15 @@ app.get("/logoff", (req, res) => {
     res.redirect("/login")
 })
 
-app.get("/cardsMedicos", (req, res) => {
-    let tipoPerfil = localStorage.getItem("tipoPerfil")
-    if(tipoPerfil == "nulo"){
-        res.render("erro")
-    }else{
-        let x = localStorage.getItem("perfilLogado")
-        res.render("cardsMedicos", {x})
-    }
-})
+// app.get("/cardsMedicos", (req, res) => {
+//     let tipoPerfil = localStorage.getItem("tipoPerfil")
+//     if(tipoPerfil == "nulo"){
+//         res.render("erro")
+//     }else{
+//         let x = localStorage.getItem("perfilLogado")
+//         res.render("cardsMedicos", {x})
+//     }
+// })
 
 app.post("/login", (req, res) => {
     let login = req.body.login
@@ -326,6 +326,30 @@ app.post('/editarEspecialidade', (req, res) => {
         })
     }//else
 })//editarEspecialidade
+
+app.get("/listarMedico", (req, res) => {
+    let tipoPerfil = localStorage.getItem("tipoPerfil")
+    if(tipoPerfil == "user" || tipoPerfil == "nulo"){
+        res.render("erro")
+    }else{
+        dbo.collection('medico').find({}).toArray((err, resultado) => {
+            if (err) throw err
+            res.render("listaMedico", { medicos: resultado })
+        })
+    }//else
+})//listarMedico
+
+app.get("/cardsMedicos", (req, res) => {
+    let tipoPerfil = localStorage.getItem("tipoPerfil")
+    if(tipoPerfil == "nulo"){
+        res.render("erro")
+    }else{
+        dbo.collection("medico").find({}).toArray((err, resultado) => {
+            if (err) throw err
+            res.render("cardsMedicos", { medicos: resultado })
+        })
+    }//else
+})//listarMedico
 
 app.listen(porta, () => {
     console.log("Sistema rodando na porta: [" + porta + "]")
