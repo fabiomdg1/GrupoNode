@@ -1,18 +1,34 @@
-<div class="container">
-    <div class="row">
-        <div class="col-lg-6">
-            <h1>Login</h1>
+<div class="container-fluid loginContainer">
+    <div class="row ">
+        <div class="col-lg-6 login text-center">
+            <h1 class="mb-5">Login</h1>
             <form action="/login" method="post">
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Login</label>
-                    <input type="text" class="form-control" id="login" name="login">
+                <div class="input-group w-100 ">
+                    <span class="input-group-text" id="basic-addon1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-person-fill" viewBox="0 0 16 16">
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
+                        </svg>
+                    </span>
+                    <input type="text" class="form-control" placeholder="Input group example"
+                        aria-label="Input group example" aria-describedby="basic-addon1" name="login">
                 </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Senha</label>
-                    <input type="password" class="form-control" id="senha" name="senha">
+                <div class="input-group w-100 mt-5">
+                    <span class="input-group-text" id="basic-addon1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-lock-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z">
+                            </path>
+                        </svg>
+                    </span>
+                    <input type="password" class="form-control" placeholder="Input group example"
+                        aria-label="Input group example" aria-describedby="basic-addon1" name="senha">
                 </div>
-                <button type="submit" class="btn btn-primary">Logar</button>
-                <a href="#" class="btn btn-outline-primary">Cadastre-se</a>
+                <div class="mt-5">
+                    <button type="submit" class="btn mx-2">Logar</button>
+                    <button href="#" class="btn">Cadastre-se</button>
+                </div>
             </form>
         </div>
     </div>
