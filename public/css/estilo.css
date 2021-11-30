@@ -53,3 +53,9 @@
     background-color: white ;
     color: #1F2B6C;
 }
+
+.navbar a{
+    color: white!important;
+    font-size: 18px;
+}
+

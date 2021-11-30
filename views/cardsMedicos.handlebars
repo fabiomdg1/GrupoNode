@@ -1,20 +1,20 @@
-<h1>Nossos</h1>
+<h1>Conheça nossos médicos</h1>
 
 {{#each medicos}}
-    <div class="card" style="width: 18rem;">
-        <img src="{{url}}" class="d-block w-100 card-img-top" alt="">
-        <div class="card-body">
-            <h5 class="card-title">{{nome}}</h5>
-            <p class="card-text">{{especialidade}}</p>
-            <button onclick="mostrarModal(this)" href="#" class="btn btn-primary">Perfil Completo
-              <input type="hidden" value="{{nome}}">
-              <input type="hidden" value="{{email}}">
-              <input type="hidden" value="{{crm}}">
-              <input type="hidden" value="{{especialidade}}">
-              <input type="hidden" value="{{formacao}}">
-            </button>
-        </div>
-    </div>
+<div class="card" style="width: 18rem;">
+  <img src="{{url}}" class=" w-100 card-img-top" alt="">
+  <div class="card-body">
+    <h5 class="card-title">{{nome}}</h5>
+    <p class="card-text">{{especialidade}}</p>
+    <button onclick="mostrarModal(this)" href="#" class="btn ">Perfil Completo
+      <input type="hidden" value="{{nome}}">
+      <input type="hidden" value="{{email}}">
+      <input type="hidden" value="{{crm}}">
+      <input type="hidden" value="{{especialidade}}">
+      <input type="hidden" value="{{formacao}}">
+    </button>
+  </div>
+</div>
 {{/each}}
 
 <div class="modal" tabindex="-1" id="modalAlerta">
@@ -25,10 +25,10 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" id="corpoModal">
-          {{!-- campo do modal, as infos vão ser inseridas aqui --}}
+        {{!-- campo do modal, as infos vão ser inseridas aqui --}}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fechar</button>
+        <button type="button" class="btn" data-bs-dismiss="modal">Fechar</button>
       </div>
     </div>
   </div>
