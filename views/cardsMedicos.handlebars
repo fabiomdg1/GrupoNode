@@ -1,4 +1,5 @@
-<div class="container text-center cardsM">
+<div class="container-fluid text-center cardsM">
+  {{!-- <img src="img/banneruser.png" class="bannerUser w-100"> --}}
   <h1>Conheça nossos médicos</h1>
   <div class="row">
     <div class="col-lg-6">
@@ -47,11 +48,11 @@
   {{else}}
 
   <div class="container">
-    
-    <div class="row">
+
+    <div class="row my-4">
       {{#each medicos}}
       <div class="col-lg-3">
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 17rem;">
           <img src="{{url}}" class=" w-100 card-img-top" alt="">
           <div class="card-body">
             <h5 class="card-title">{{nome}}</h5>

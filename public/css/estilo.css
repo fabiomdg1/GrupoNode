@@ -66,3 +66,9 @@
 .cardsM{
     min-width: 75vh;
 }
+
+.clear{
+    border: 1px #1F2B6C solid;
+    background-color: white;
+    color: #1F2B6C;
+}
