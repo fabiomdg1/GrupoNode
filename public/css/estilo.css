@@ -8,7 +8,7 @@
 }
 
 .footer{
-    justify-content: space-between;
+    justify-content: space-between;  
 }
 
 .loginContainer{
@@ -59,3 +59,7 @@
     font-size: 18px;
 }
 
+.cardsM{
+    min-width: 75vh;
+   
+}

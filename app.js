@@ -350,6 +350,30 @@ app.get("/cardsMedicos", (req, res) => {
         })
     }//else
 })//listarMedico
+//Criando variável para receber nome preenchido no input de busca por nome. Realizar busca na collection do banco de dados.
+//renderizar resultado da busca.
+app.post('/buscaNome', (req, res) =>{
+    let nome = req.body.buscaNome
+    dbo.collection('medico').find({'nome': new RegExp(nome, 'i')}).toArray((err, resultado)=>{
+        if (err) throw err
+        if (resultado.length == 0){
+            let vazio = true
+            res.render('cardsMedicos', {vazio})
+        } else res.render('cardsMedicos', {medicos: resultado})
+    })
+})
+
+app.post('/buscaEspecialidade', (req, res) =>{
+    let especialidade = req.body.buscaEspecialidade
+    dbo.collection('medico').find({'especialidade': new RegExp(especialidade, 'i')}).toArray((err, resultado)=>{
+        if (err) throw err
+        if (resultado.length == 0){
+            let vazio = true
+            res.render('cardsMedicos', {vazio})
+        } else res.render('cardsMedicos', {medicos: resultado})
+    })
+})
+
 
 app.listen(porta, () => {
     console.log("Sistema rodando na porta: [" + porta + "]")

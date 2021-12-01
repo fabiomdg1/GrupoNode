@@ -1,37 +1,85 @@
-<h1>Conheça nossos médicos</h1>
+<div class="container text-center cardsM">
+  <h1>Conheça nossos médicos</h1>
+  <div class="row">
+    <div class="col-lg-6">
+      <form action="/buscaNome" method="post">
+        {{!-- <input class="form-control" type="text" id="buscaNome" name="buscaNome" placeholder="Pesquisar por nome">
+        <button type="submit">Pesquisar</button> --}}
 
-{{#each medicos}}
-<div class="card" style="width: 18rem;">
-  <img src="{{url}}" class=" w-100 card-img-top" alt="">
-  <div class="card-body">
-    <h5 class="card-title">{{nome}}</h5>
-    <p class="card-text">{{especialidade}}</p>
-    <button onclick="mostrarModal(this)" href="#" class="btn ">Perfil Completo
-      <input type="hidden" value="{{nome}}">
-      <input type="hidden" value="{{email}}">
-      <input type="hidden" value="{{crm}}">
-      <input type="hidden" value="{{especialidade}}">
-      <input type="hidden" value="{{formacao}}">
-    </button>
+        <div class="input-group w-100">
+          <input name="buscaNome" id="buscaNome" type="text" class="form-control" placeholder="Pesquisar por nome"
+            aria-label="Input group example" aria-describedby="basic-addon1">
+          <button type="submit" class="input-group-text" id="basic-addon1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+              viewBox="0 0 16 16">
+              <path
+                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z">
+              </path>
+            </svg>
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="col-lg-6">
+      <form action="/buscaEspecialidade" method="post">
+        {{!-- <input class="form-control" type="text" id="buscaEspecialidade" name="buscaEspecialidade"
+          placeholder="Pesquisar por Especialidade">
+        <button type="submit">Pesquisar</button> --}}
+
+        <div class="input-group w-100">
+          <input name="buscaEspecialidade" id="buscaEspecialidade" type="text" class="form-control"
+            placeholder="Pesquisar por especialidade" aria-label="Input group example" aria-describedby="basic-addon1">
+          <button type="submit" class="input-group-text" id="basic-addon1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+              viewBox="0 0 16 16">
+              <path
+                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z">
+              </path>
+            </svg>
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
-{{/each}}
 
-<div class="modal" tabindex="-1" id="modalAlerta">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="tituloModal"></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body" id="corpoModal">
-        {{!-- campo do modal, as infos vão ser inseridas aqui --}}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn" data-bs-dismiss="modal">Fechar</button>
+
+  {{#if vazio}}<h3>Nenhum resultado encontrado</h3>
+  {{else}}
+  {{#each medicos}}
+  <div class="card" style="width: 18rem;">
+    <img src="{{url}}" class=" w-100 card-img-top" alt="">
+    <div class="card-body">
+      <h5 class="card-title">{{nome}}</h5>
+      <p class="card-text">{{especialidade}}</p>
+      <button onclick="mostrarModal(this)" href="#" class="btn ">Perfil Completo
+        <input type="hidden" value="{{nome}}">
+        <input type="hidden" value="{{email}}">
+        <input type="hidden" value="{{crm}}">
+        <input type="hidden" value="{{especialidade}}">
+        <input type="hidden" value="{{formacao}}">
+      </button>
+    </div>
+  </div>
+  {{/each}}
+  {{/if}}
+
+
+
+  <div class="modal" tabindex="-1" id="modalAlerta">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="tituloModal"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="corpoModal">
+          {{!-- campo do modal, as infos vão ser inseridas aqui --}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn" data-bs-dismiss="modal">Fechar</button>
+        </div>
       </div>
     </div>
   </div>
 </div>
-
 {{>footer}}
