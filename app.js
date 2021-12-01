@@ -62,16 +62,6 @@ app.get("/logoff", (req, res) => {
     res.redirect("/login")
 })
 
-// app.get("/cardsMedicos", (req, res) => {
-//     let tipoPerfil = localStorage.getItem("tipoPerfil")
-//     if(tipoPerfil == "nulo"){
-//         res.render("erro")
-//     }else{
-//         let x = localStorage.getItem("perfilLogado")
-//         res.render("cardsMedicos", {x})
-//     }
-// })
-
 app.post("/login", (req, res) => {
     let login = req.body.login
     let senha = req.body.senha
@@ -345,9 +335,11 @@ app.get("/cardsMedicos", (req, res) => {
     if(tipoPerfil == "nulo"){
         res.render("erro")
     }else{
+        let perfilLogado = localStorage.getItem("perfilLogado")
+
         dbo.collection("medico").find({}).toArray((err, resultado) => {
             if (err) throw err
-            res.render("cardsMedicos", { medicos: resultado })
+            res.render("cardsMedicos", { medicos: resultado, perfilLogado })
         })
     }//else
 })//listarMedico

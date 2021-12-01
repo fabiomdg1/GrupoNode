@@ -3,6 +3,7 @@ Vlibras
 estilizar pagina de erro
     definir os caminhos que levam a ela
 colocar img no banco
+nav para adm e para user
 
 [+/-]
 navbars dinâmicas [funfou, só falta deixar bonitin]
