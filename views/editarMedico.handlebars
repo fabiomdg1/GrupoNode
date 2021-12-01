@@ -1,3 +1,6 @@
+<style>
+    
+</style>
 <h1>Editar Medico</h1>
 <div class="container">
     <div class="row">
@@ -6,20 +9,20 @@
                 <input type="hidden" name="id" id="id" value = '{{resultado._id}}'>
                 
                 <div class="input-group mb-2">
-                    <input type="text" class="form-control" name="nome" id="nome" value = '{{resultado.nome}}' >
+                    <input type="text" class="form-control" name="nome" id="nome" value = '{{resultado.nome}}' placeholder="Insira o nome do médico">
                 </div> 
 
                 <div class="input-group mb-2">
-                    <input type="text" class="form-control" name="crm" id="crm" value = '{{resultado.crm}}'>
+                    <input type="text" class="form-control" name="crm" id="crm" value = '{{resultado.crm}}' placeholder="Insira CRM do médico">
                 </div>
 
                 {{!-- trocar pelo dropdown menu --}}
                 <div class="input-group mb-2">
-                    <input type="text" class="form-control" name="especialidade" id="especialidade" value = '{{resultado.especialidade}}'>
+                    <input type="text" class="form-control" name="especialidade" id="especialidade" value = '{{resultado.especialidade}}' placeholder="Especialidade">
                 </div>
 
                 <div class="input-group mb-2">
-                    <input type="text" class="form-control" name="rg" id="rg" value = '{{resultado.rg}}'>
+                    <input type="text" class="form-control" name="rg" id="rg" value = '{{resultado.rg}}' placeholder="Insira o RG do médico">
                 </div>
 
                 <div class="input-group mb-2">
@@ -27,11 +30,11 @@
                 </div>
 
                 <div class="input-group mb-2">
-                    <input type="text" class="form-control" name="url" id="url" value = '{{resultado.url}}'>
+                    <input type="text" class="form-control" name="url" id="url" value = '{{resultado.url}}' placeholder="Url da foto do médico">
                 </div>
 
                 <div class="input-group mb-2">
-                    <input type="text" class="form-control" name="formacao" id="formacao" value = '{{resultado.formacao}}'>
+                    <input type="text" class="form-control" name="formacao" id="formacao" value = '{{resultado.formacao}}' placeholder="Formação">
                 </div>
 
                 <div class="input-group mb-2">
@@ -39,7 +42,7 @@
                 </div>
 
                 <div class="input-group mb-2">
-                    <input type="text" class="form-control" name="telefone" id="telefone" value = '{{resultado.telefone}}'>
+                    <input type="text" class="form-control" name="telefone" id="telefone" value = '{{resultado.telefone}}' placeholder="Digite telefone de contato">
                 </div>
                 
                 <button type="submit" class="btn btn-success">Enviar</button>

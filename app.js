@@ -127,6 +127,7 @@ app.post('/editarMedico', (req, res) => {
             crm: req.body.crm,
             rg: req.body.rg,
             cpf: req.body.cpf,
+            url: req.body.url,
             email: req.body.email,
             telefone: req.body.telefone,
             formacao: req.body.formacao

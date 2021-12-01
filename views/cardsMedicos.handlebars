@@ -45,26 +45,31 @@
 
   {{#if vazio}}<h3>Nenhum resultado encontrado</h3>
   {{else}}
-  {{#each medicos}}
-  <div class="card" style="width: 18rem;">
-    <img src="{{url}}" class=" w-100 card-img-top" alt="">
-    <div class="card-body">
-      <h5 class="card-title">{{nome}}</h5>
-      <p class="card-text">{{especialidade}}</p>
-      <button onclick="mostrarModal(this)" href="#" class="btn ">Perfil Completo
-        <input type="hidden" value="{{nome}}">
-        <input type="hidden" value="{{email}}">
-        <input type="hidden" value="{{crm}}">
-        <input type="hidden" value="{{especialidade}}">
-        <input type="hidden" value="{{formacao}}">
-      </button>
+
+  <div class="container">
+    
+    <div class="row">
+      {{#each medicos}}
+      <div class="col-lg-3">
+        <div class="card" style="width: 18rem;">
+          <img src="{{url}}" class=" w-100 card-img-top" alt="">
+          <div class="card-body">
+            <h5 class="card-title">{{nome}}</h5>
+            <p class="card-text">{{especialidade}}</p>
+            <button onclick="mostrarModal(this)" href="#" class="btn ">Perfil Completo
+              <input type="hidden" value="{{nome}}">
+              <input type="hidden" value="{{email}}">
+              <input type="hidden" value="{{crm}}">
+              <input type="hidden" value="{{especialidade}}">
+              <input type="hidden" value="{{formacao}}">
+            </button>
+          </div>
+        </div>
+      </div>
+      {{/each}}
     </div>
   </div>
-  {{/each}}
   {{/if}}
-
-
-
   <div class="modal" tabindex="-1" id="modalAlerta">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -82,4 +87,5 @@
     </div>
   </div>
 </div>
+
 {{>footer}}
