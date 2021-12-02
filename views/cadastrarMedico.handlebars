@@ -1,20 +1,20 @@
 {{>navBarAdm}}
 
-<h1>Cadastro de Medico</h1>
+<h2 class="text-center mt-2">Cadastro de Médico</h2>
 <div class="container">
-    <div class="row">
+    <div class="row mb-1 h-100 justify-content-center align-items-center">
         <div class="col-lg-6">
             <form action="/cadastrarMedico" class="form-group" method="post">
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite o nome">
+                <div class="input-group mb-1">
+                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Informe o nome">
                 </div> 
 
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control" name="crm" id="crm" placeholder="Digite o CRM">
+                <div class="input-group mb-1">
+                    <input type="text" class="form-control" name="crm" id="crm" placeholder="Infome o CRM">
                 </div>
 
                 {{!-- trocar pelo dropdown menu --}}
-                <div class="input-group mb-2">
+                <div class="input-group mb-1">
                     {{!-- <input type="text" class="form-control" name="especialidade" id="especialidade" placeholder="especialidade"> --}}
                     <select name="especialidade" class="form-select">
                         <option selected disabled value="nill">Selecione a especialidade</option>
@@ -24,28 +24,32 @@
                     </select>
                 </div>
 
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control" name="rg" id="rg" placeholder="RG">
+                <div class="input-group mb-1">
+                    <input type="text" class="form-control" name="rg" id="rg" placeholder="Informe o RG">
                 </div>
 
-                <div class="input-group mb-2">
-                    <input type="text"  class="form-control" name="cpf" id="cpf" placeholder="cpf">
+                <div class="input-group mb-1">
+                    <input type="text"  class="form-control" name="cpf" id="cpf" placeholder="Informe o CPF XXX.XXX.XXX-XX">
                 </div>
 
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control" name="url" id="url" placeholder="url">
+                <div class="input-group mb-1">
+                    <input type="text" class="form-control" name="url" id="url" placeholder="Url">
                 </div>
 
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control" name="formacao" id="formacao" placeholder="formacao">
+                <div class="input-group mb-1">
+                    <input type="text" class="form-control" name="formacao" id="formacao" placeholder="Informe a formação">
                 </div>
 
-                <div class="input-group mb-2">
-                    <input type="email" class="form-control" name="email" id="email" placeholder="digite o email">
+                <div class="input-group mb-1">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Informe o email ex:email@email.com">
                 </div>
 
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control" name="telefone" id="telefone" placeholder="digite o telefone">
+                <div class="input-group mb-1">
+                    <input type="text" class="form-control" name="telefone" id="telefone" placeholder="Informe o telefone (XX)XXXX-XXXX">
+                </div>
+                <div class="col mt-2 text-end">
+                    <button type="submit" class="btn">Enviar</button>
+                    <button type="reset" class="btn btn1">Limpar</button>
                 </div>
                 
                 <button type="submit" class="btn ">Enviar</button>
