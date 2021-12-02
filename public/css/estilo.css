@@ -7,6 +7,11 @@
     color: white;
 }
 
+.navbarAdm{
+    background-color: lightseagreen!important;
+    color: black;
+}
+
 .footer{
     justify-content: space-between;  
 }

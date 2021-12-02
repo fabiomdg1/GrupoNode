@@ -84,7 +84,6 @@ app.post("/login", (req, res) => {
                 // logou como adm, vai pro dashboard
                 res.redirect("/listarMedico")
             }
-            
         }else{
             // senha errada
             res.send("Senha incorreta")
@@ -98,10 +97,10 @@ app.get("/editarMedico/:id", (req, res) => {
         res.render("erro")
     }else{
         var o_id = req.params.id
-
+        let perfilLogado = localStorage.getItem("perfilLogado")
         dbo.collection("medico").findOne({ _id: ObjectId(o_id) }, (err, resultado) => {
             if (err) throw err
-            res.render("editarMedico", { resultado })
+            res.render("editarMedico", { resultado, perfilLogado })
         })
     }//else
 })//editarMedico
@@ -143,8 +142,9 @@ app.get("/cadastrarMedico", (req, res) => {
     if(tipoPerfil == "user" || tipoPerfil == "nulo"){
         res.render("erro")
     }else{
+        let perfilLogado = localStorage.getItem("perfilLogado")
         dbo.collection("especialidade").find({}).toArray((erro, result) => {
-            res.render("cadastrarMedico", {especialidades:result})
+            res.render("cadastrarMedico", {especialidades:result, perfilLogado})
         })
     }//else
 })//cadastrarMedico
@@ -154,9 +154,10 @@ app.get("/listarMedico", (req, res) => {
     if(tipoPerfil == "user" || tipoPerfil == "nulo"){
         res.render("erro")
     }else{
+        let perfilLogado = localStorage.getItem("perfilLogado")
         dbo.collection('medico').find({}).toArray((err, resultado) => {
             if (err) throw err
-            res.render("listaMedico", { medicos: resultado })
+            res.render("listaMedico", { medicos: resultado, perfilLogado })
         })
     }//else
 })//listarMedico
@@ -221,7 +222,8 @@ app.get("/cadastrarEspecialidade", (req, res) => {
     if(tipoPerfil == "user" || tipoPerfil == "nulo"){
         res.render("erro")
     }else{
-        res.render("cadastrarEspecialidade")
+        let perfilLogado = localStorage.getItem("perfilLogado")
+        res.render("cadastrarEspecialidade", {perfilLogado})
     }//else
 })//cadastrarEspecialidade
 
@@ -261,9 +263,10 @@ app.get('/listarEspecialidade', (req, res) => {
     if(tipoPerfil == "user" || tipoPerfil == "nulo"){
         res.render("erro")
     }else{
+        let perfilLogado = localStorage.getItem("perfilLogado")
         dbo.collection('especialidade').find({}).toArray((erro, resultado) => {
             if (erro) throw erro
-            res.render('listarEspecialidade', { especialidades: resultado })
+            res.render('listarEspecialidade', { especialidades: resultado, perfilLogado })
         })
     }//else
 })//listarEspecialidade
@@ -288,9 +291,10 @@ app.get('/editarEspecialidade/:id', (req, res) => {
         res.render("erro")
     }else{
         let o_id = req.params.id
+        let perfilLogado = localStorage.getItem("perfilLogado")
         dbo.collection('especialidade').findOne({ _id: ObjectId(o_id) }, (erro, resultado) => {
             if (erro) throw erro
-            res.render('editarEspecialidade', { especialidade: resultado })
+            res.render('editarEspecialidade', { especialidade: resultado, perfilLogado })
         })
     }//else
 })//editarEspecialidade
@@ -323,9 +327,10 @@ app.get("/listarMedico", (req, res) => {
     if(tipoPerfil == "user" || tipoPerfil == "nulo"){
         res.render("erro")
     }else{
+        let perfilLogado = localStorage.getItem("perfilLogado")
         dbo.collection('medico').find({}).toArray((err, resultado) => {
             if (err) throw err
-            res.render("listaMedico", { medicos: resultado })
+            res.render("listaMedico", { medicos: resultado, perfilLogado })
         })
     }//else
 })//listarMedico

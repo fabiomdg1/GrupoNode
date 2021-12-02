@@ -1,12 +1,14 @@
 toda a estilização
 Vlibras
-estilizar pagina de erro
-    definir os caminhos que levam a ela
-colocar img no banco
-nav para adm e para user
+definir os caminhos que levam a página de erro (revisar)
+arrumar a cor do menu sanduiche
+responsividade
+textArea na formação do medico
+
 
 [+/-]
-navbars dinâmicas [funfou, só falta deixar bonitin]
+navbars dinâmicas [colocar o login e o logoff colados a direita]
+
 
 [OK]
 contar a quantidade de medicos daquela especialidade [ok]
