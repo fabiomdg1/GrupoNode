@@ -1,7 +1,8 @@
 {{>navBarAdm}}
 
-<h1 class="display-3">Lista Especialidades</h1>
-<a href="/cadastrarEspecialidade" class="btn btn-primary mt-5">Cadastrar Especialidade</a>  
+{{!-- <h1 class="display-3">Lista Especialidades</h1> --}}
+<h3 class="text-center mt-2 titulo">Lista de Especialidades</h3>
+{{!-- <a href="/cadastrarEspecialidade" class="btn btn-primary mt-5">Cadastrar Especialidade</a>   --}}
 
 <div class="container">
     <div class="row">
@@ -41,6 +42,9 @@
                     {{/each}}
                 </tbody>
             </table>
+            <div class="col mt-3 text-end">
+                <a href="/cadastrarEspecialidade" class="btn mt-5"><button type="submit" class="btn btnAdm">Cadastrar Médico</button></a>                 
+            </div>
         </div> {{!-- col --}}
     </div> {{!-- row --}}
 </div> {{!-- container --}}
