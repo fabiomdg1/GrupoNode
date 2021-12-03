@@ -1,44 +1,46 @@
 {{>navBarAdm}}
 
-<h1>Cadastrar Especialidades</h1>
+<h3 class="text-center mt-2 titulo">Cadastro de Especialidade</h3>
 <div class="container">
-    <div class="row my-5">
+    <div class="row  my-3 h-200 justify-content-center align-items-center">
         <div class="col-lg-6">
             <form action="/cadastrarEspecialidade" class="form-group" method="post">
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite o nome">
+                <div class="input-group my-3">
+                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Informe o nome">
                 </div>
-                <div class="input-group mb-2">
+                <div class="input-group my-3">
                     <input type="text" class="form-control" name="categoria" id="categoria"
-                        placeholder="Digite a categoria">
+                        placeholder="Informe a categoria">
                 </div>
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control" name="codigo" id="codigo" placeholder="Código">
+                <div class="input-group my-3">
+                    <input type="text" class="form-control" name="codigo" id="codigo" placeholder="Informe Código">
                 </div>
-                <div>
-                    <label for="local">Local</label>
-                    <div class="form-check form-check-inline">
+                <div class="my-3">
+                    <label for="local">Local:</label>
+                    <div class="form-check form-check-inline mx-3">
                         <input class="form-check-input" type="radio" name="local" id="local1" value="clinica" checked>
                         <label class="form-check-label" for="local1">Clínica</label>
                     </div>
-                    <div class="form-check form-check-inline">
+                    <div class="form-check form-check-inline mx-3">
                         <input class="form-check-input" type="radio" name="local" id="local2" value="consultorio">
                         <label class="form-check-label" for="local2">Consultório</label>
                     </div>
                 </div>
-                <div>
-                    <label for="planoSaude">Plano de Saúde</label>
-                    <div class="form-check form-check-inline">
+                <div class="my-3">
+                    <label for="planoSaude">Plano de Saúde:</label>
+                    <div class="form-check form-check-inline mx-3">
                         <input class="form-check-input" type="radio" name="planoSaude" id="planoSaude1" value="sim" checked>
                         <label class="form-check-label" for="planoSaude1">Sim</label>
                     </div>
-                    <div class="form-check form-check-inline">
+                    <div class="form-check form-check-inline mx-3">
                         <input class="form-check-input" type="radio" name="planoSaude" id="planoSaude2" value="nao">
                         <label class="form-check-label" for="planoSaude2">Não</label>
                     </div>
                 </div>
-                <button type="submit" class="btn">Enviar</button>
-                <button type="reset" class="btn clear">Limpar</button>
+                <div class="col mt-3 text-end">
+                    <button type="submit" class="btn btnAdm ">Enviar</button>
+                    <button type="reset" class="btn btnAdm clearAdm">Limpar</button>
+                </div>
             </form> {{!-- form --}}
         </div> {{!-- col --}}
     </div> {{!-- row --}}
