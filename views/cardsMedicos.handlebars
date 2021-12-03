@@ -1,16 +1,16 @@
 {{>navBarUser}}
-
+<img src="img/banneruser.png">
 <div class="container-fluid text-center cardsM">
   {{!-- <img src="img/banneruser.png" class="bannerUser w-100"> --}}
-  <h1>Conheça nossos médicos</h1>
-  <div class="row">
+  {{!-- <h1 class="titleCards">Conheça nossos médicos</h1> --}}
+  <div class="row my-4">
     <div class="col-lg-6">
       <form action="/buscaNome" method="post">
         {{!-- <input class="form-control" type="text" id="buscaNome" name="buscaNome" placeholder="Pesquisar por nome">
         <button type="submit">Pesquisar</button> --}}
 
         <div class="input-group w-100">
-          <input name="buscaNome" id="buscaNome" type="text" class="form-control" placeholder="Pesquisar por nome"
+          <input name="buscaNome" id="buscaNome" type="text" class="form-control" placeholder="Pesquisar médico por nome"
             aria-label="Input group example" aria-describedby="basic-addon1">
           <button type="submit" class="input-group-text" id="basic-addon1">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
@@ -31,7 +31,7 @@
 
         <div class="input-group w-100">
           <input name="buscaEspecialidade" id="buscaEspecialidade" type="text" class="form-control"
-            placeholder="Pesquisar por especialidade" aria-label="Input group example" aria-describedby="basic-addon1">
+            placeholder="Pesquisar médico por especialidade" aria-label="Input group example" aria-describedby="basic-addon1">
           <button type="submit" class="input-group-text" id="basic-addon1">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
               viewBox="0 0 16 16">
@@ -59,7 +59,7 @@
           <div class="card-body">
             <h5 class="card-title">{{nome}}</h5>
             <p class="card-text">{{especialidade}}</p>
-            <button onclick="mostrarModal(this)" href="#" class="btn ">Perfil Completo
+            <button onclick="mostrarModal(this)" href="#" class="btn btnUser">Perfil Completo
               <input type="hidden" value="{{nome}}">
               <input type="hidden" value="{{email}}">
               <input type="hidden" value="{{crm}}">
@@ -84,7 +84,7 @@
           {{!-- campo do modal, as infos vão ser inseridas aqui --}}
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn" data-bs-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btnUser" data-bs-dismiss="modal">Fechar</button>
         </div>
       </div>
     </div>
