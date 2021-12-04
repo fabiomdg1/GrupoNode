@@ -5,7 +5,7 @@
    padding: 0;
 }
 .navbar{
-    background-color: #1F2B6C!important;
+    background-color: #688ede!important;
     color: white;
 }
 
@@ -16,6 +16,10 @@
 
 .footer{
     justify-content: space-between;  
+}
+
+.tituloUser{
+    color:#1D438A;
 }
 
 .cardsM{
@@ -33,17 +37,30 @@
 .login{
     position: relative;
     margin-left: auto;
-    color: #1F2B6C;
-    width: 35%;
+    color: #688ede;
+    width: 45%;
     box-shadow: 0 0 1.8rem rgb(0 0 0 / 15%);
     border-radius: 10px;
     padding: 50px;
-    height: 75vh;
+    height: 450px;
+}
+
+@media(max-width:820px){
+    .login{
+        margin-left: 0;
+        padding: 2;
+        width: 70%;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+    }
 }
 
 .login input{
     background-color: rgba(255, 255, 255, .3);
-    border: 1px solid #1F2B6C;
+    
+    /* border: 1px solid #688ede; */
 }
 
 .login input:hover{
@@ -54,15 +71,19 @@
     width: 50px;
 }
 
+.btnLogin:hover{
+    background-color: white;
+}
+
 .btnUser{
-    background-color: #1F2B6C;
+    background-color: #688ede;
     color: white;
 }
 
 .btnUser:hover{
-    box-shadow:2px 2px 2px 2px#1F2B6C;
+    box-shadow:2px 2px 2px 2px#688ede;
     background-color: white ;
-    color: #1F2B6C;
+    color: #0960e0;
 }
 
 .btnAdm:hover,.clearAdm:hover{
@@ -88,13 +109,13 @@
     color: lightseagreen;
 }
 
-.navbar a{
+.click, .navbar a{
     color: white!important;
     font-size: 18px;
 }
-.navbar a:hover{
+.click:hover{
     color: white!important;
-    font-size: 19px;
+    /* font-size: 19px; */
     text-decoration: underline;
 }
 
@@ -107,5 +128,36 @@
 }
 
 .listaContainer{
-    box-shadow: 0 0 1rem rgb(0 0 0 / 15%);
+    box-shadow: 0 0 7px rgb(0 0 0 / 15%);
 }
+
+.cardContainer{
+    box-shadow: 0 0 8px rgb(0 0 0 / 15%);
+}
+
+.card-body{
+    /* background-color: #BFD2F8; */
+    color: #1D438A;
+}
+
+.modal-header{
+    /* background-color: #688ede; */
+    color: #1D438A;
+}
+
+.modal{
+    font-size: 20px;
+    /* background: url("/img/banneruser.png"); */
+}
+
+.modal-body{
+    background: url("/img/modal-imagem.jpg"); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #17356E;
+}
+
+.btn-close{
+    color: #17356E;
+}
+

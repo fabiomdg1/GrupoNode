@@ -89,7 +89,7 @@ app.post("/login", (req, res) => {
         console.log(resultado)
         if(resultado == null){
             // não achamos o login
-            res.send("Não achamos seu login")
+            res.render("erroSenha")
         }else if(senha == resultado.senha){
             // senha correta
             // usando o local storage para armazenar informações do perfil logado no sistema
@@ -104,7 +104,7 @@ app.post("/login", (req, res) => {
             }
         }else{
             // senha errada
-            res.send("Senha incorreta")
+            res.render("erroSenha")
         }
     })
 })
@@ -191,6 +191,13 @@ app.post("/cadastrarMedico", (req, res) => {
         const now = new Date();
         let dataAdmissao = date.format(now, "DD/MM/YYYY")
 
+        let foto = ""
+        if(req.body.url == ""){
+            foto = "https://cdn.discordapp.com/attachments/913575824542814208/916791920297123941/Avatar.png"
+        }else{
+            foto = req.body.url
+        }
+
         let obj = {
             nome: req.body.nome,
             crm: req.body.crm,
@@ -199,7 +206,7 @@ app.post("/cadastrarMedico", (req, res) => {
             cpf: req.body.cpf,
             email: req.body.email,
             telefone: req.body.telefone,
-            url: req.body.url,
+            url: foto,
             fo0o: req.body.formacao,
             data_admissao: dataAdmissao
         }

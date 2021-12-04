@@ -1,33 +1,25 @@
-    <nav class="navbar navbar-expand-lg text-light bg-primary ">
-        <div class="container-fluid">
-            <img src="img/logo.png" alt="">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon bg-light"></span>
-            </button>
-            <div class="collapse navbar-collapse " id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/cardsMedicos">Nossos Médicos</a>
-                    </li>
-                    <ul class="nav navbar-nav me-2">
-                        <li class="nav-item">
-                                <a class="nav-link"> Bem-vindo {{perfilLogado}} </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/logoff">Sair</a>
-                        </li>
-                    </ul>
-                </ul>
-
-                {{!-- <ul class=" nav navbar-nav mr-auto d-flex">
-                    <li class="nav-item">
-                            <a class="nav-link"> Bem-vindo {{perfilLogado}} </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logoff">Sair</a>
-                    </li>
-                </ul> --}}
-            </div>
-        </div>
-    </nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <img src="img/logo.png" alt="">
+    <a class="navbar-brand" href="#"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active nav-link click" aria-current="page" href="/cardsMedicos">Nossos Médicos</a>
+        </li>
+      </ul>
+      <span class="navbar-text">
+       <a class="nav-link"> Bem-vindo  <span style="color: rgb(27, 46, 58); ">{{perfilLogado}}</span></a>
+      </span>
+      <span class="navbar-text">
+           <a class="nav-link click" href="/logoff">Sair <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-door-closed" viewBox="0 1 16 16">
+            <path d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z"></path>
+            <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"></path>
+            </svg></a>
+      </span>
+    </div>
+  </div>
+</nav>
