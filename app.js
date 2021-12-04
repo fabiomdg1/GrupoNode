@@ -41,6 +41,24 @@ app.use(express.static(__dirname + "/public"))
 localStorage.setItem("perfilLogado", "nulo")
 localStorage.setItem("tipoPerfil", "nulo")
 
+// Rota inicial direcionando para pagina de login
+app.get("/", (req, res) => {
+    let tipoPerfil = localStorage.getItem("tipoPerfil")
+    let x = localStorage.getItem("perfilLogado")
+    if(tipoPerfil == "user"){
+        // ele já está logado como user
+        res.redirect("/cardsMedicos")
+    }else if(tipoPerfil == "adm"){
+        // ele já está logado como adm
+        res.redirect("/listarMedico")
+    }else{
+        // ele não está logado
+        res.render("login")
+    }
+})
+//Fim rota inidial /
+
+
 app.get("/login", (req, res) => {
     let tipoPerfil = localStorage.getItem("tipoPerfil")
     let x = localStorage.getItem("perfilLogado")
