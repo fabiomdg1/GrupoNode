@@ -1,3 +1,7 @@
+!
+reeincrementar o numero de médicos quando a especialidade do médico for trocada
+inconsistencia no banco caso especialidades sejam apagadas
+
 [OK]
 contar a quantidade de medicos daquela especialidade [ok]
 atualizar a quantidade de medicos na especialidade mediante a criação de um novo medico [pqp, ok]

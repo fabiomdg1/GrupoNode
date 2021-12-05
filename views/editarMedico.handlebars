@@ -21,24 +21,31 @@
                 <input type="hidden" name="id" id="id" value = '{{resultado._id}}'>
                 
                 <div class="input-group mb-2">
-                    <input type="text" class="form-control" name="nome" id="nome" value = '{{resultado.nome}}' placeholder="Insira o nome do médico">
+                    <input type="text" class="form-control" name="nome" id="nome" value = '{{resultado.nome}}' placeholder="Insira o nome do médico (obrigatório)" required title="Campo Obrigatório">
                 </div> 
 
                 <div class="input-group mb-2">
-                    <input type="text" class="form-control" name="crm" id="crm" value = '{{resultado.crm}}' placeholder="Insira CRM do médico">
+                    <input type="text" class="form-control" name="crm" id="crm" value = '{{resultado.crm}}' placeholder="Insira CRM do médico (obrigatório)" required title="Campo Obrigatório">
                 </div>
 
-                {{!-- trocar pelo dropdown menu --}}
+                {{!-- o select vai ser preenchido com o valor que já estava presente no cadastro do médico,
+                e as opçoes que estavam no banco serão listadas --}}
+                <div class="input-group mb-3">
+                    <select name="especialidade" id="especialidade" class="form-select" required>
+                        <option value="{{resultado.especialidade}}"> {{resultado.especialidade}}</option>
+                        {{#each espcs}}
+                            <option value="{{nome}}">{{nome}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+
+
                 <div class="input-group mb-2">
-                    <input type="text" class="form-control" name="especialidade" id="especialidade" value = '{{resultado.especialidade}}' placeholder="Especialidade">
+                    <input type="text" class="form-control" name="rg" id="rg" value = '{{resultado.rg}}' placeholder="Insira o RG do médico (obrigatório)" required title="Campo Obrigatório">
                 </div>
 
                 <div class="input-group mb-2">
-                    <input type="text" class="form-control" name="rg" id="rg" value = '{{resultado.rg}}' placeholder="Insira o RG do médico">
-                </div>
-
-                <div class="input-group mb-2">
-                    <input type="text"  class="form-control" name="cpf" id="cpf" value = '{{resultado.cpf}}' placeholder="Insira o CPF do médico">
+                    <input type="text"  class="form-control" name="cpf" id="cpf" value = '{{resultado.cpf}}' placeholder="Insira o CPF do médico (obrigatório)" required title="Campo Obrigatório">
                 </div>
 
                 <div class="input-group mb-2">
@@ -46,7 +53,7 @@
                 </div>
 
                 <div class="input-group mb-2">
-                    <input type="textarea" class="form-control" name="formacao" id="formacao" value = '{{resultado.formacao}}' placeholder="Formação">
+                    <input type="textarea" class="form-control" name="formacao" id="formacao" value = '{{resultado.formacao}}' placeholder="Formação (obrigatório)" required title="Campo Obrigatório">
                 </div>
 
                 <div class="input-group mb-2">

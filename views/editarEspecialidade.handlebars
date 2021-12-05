@@ -19,15 +19,15 @@
                 {{!-- puxa o objeto Id para fazer a edição na rotina editarespecialidade no app --}}
                 <input type="hidden" name="id" value="{{especialidade._id}}">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite o nome"
+                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite o nome (obrigatório)" required title="Campo Obrigatório"
                         value="{{especialidade.nome}}">
                 </div>
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" name="categoria" id="categoria"
-                        placeholder="Digite a categoria" value="{{especialidade.categoria}}">
+                        placeholder="Digite a categoria (obrigatório)" required title="Campo Obrigatório" value="{{especialidade.categoria}}">
                 </div>
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" name="codigo" id="codigo" placeholder="Código"
+                    <input type="text" class="form-control" name="codigo" id="codigo" placeholder="informe o Código (obrigatório)" required title="Campo Obrigatório"
                         value="{{especialidade.codigo}}">
                 </div>
                 <div>

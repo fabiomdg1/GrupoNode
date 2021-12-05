@@ -6,17 +6,17 @@
         <div class="col-lg-6">
             <form action="/cadastrarMedico" class="form-group" method="post">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Informe o nome">
+                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Informe o nome (obrigatório)" required title="Campo Obrigatório">
                 </div> 
 
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" name="crm" id="crm" placeholder="Infome o CRM">
+                    <input type="text" class="form-control" name="crm" id="crm" placeholder="Infome o CRM (obrigatório)" required title="Campo Obrigatório">
                 </div>
 
                 {{!-- trocar pelo dropdown menu --}}
                 <div class="input-group mb-3">
                     {{!-- <input type="text" class="form-control" name="especialidade" id="especialidade" placeholder="especialidade"> --}}
-                    <select name="especialidade" class="form-select">
+                    <select name="especialidade" class="form-select" required>
                         <option selected disabled value="nill">Selecione a especialidade</option>
                         {{#each especialidades}}
                             <option value="{{nome}}">{{nome}}</option>
@@ -25,11 +25,11 @@
                 </div>
 
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" name="rg" id="rg" placeholder="Informe o RG">
+                    <input type="text" class="form-control" name="rg" id="rg" placeholder="Informe o RG (obrigatório)" required title="Campo Obrigatório">
                 </div>
 
                 <div class="input-group mb-3">
-                    <input type="text"  class="form-control" name="cpf" id="cpf" placeholder="Informe o CPF XXX.XXX.XXX-XX">
+                    <input type="text"  class="form-control" name="cpf" id="cpf" placeholder="Informe o CPF XXX.XXX.XXX-XX (obrigatório)" required title="Campo Obrigatório">
                 </div>
 
                 <div class="input-group mb-3">
@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="input-group mb-3">
-                    <input type="textarea" class="form-control" name="formacao" id="formacao" placeholder="Informe a formação">
+                    <input type="textarea" class="form-control" name="formacao" id="formacao" placeholder="Informe a formação (obrigatório)" required title="Campo Obrigatório">
                 </div>
 
                 <div class="input-group mb-3">

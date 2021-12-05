@@ -6,14 +6,15 @@
         <div class="col-lg-6">
             <form action="/cadastrarEspecialidade" class="form-group" method="post">
                 <div class="input-group my-3">
-                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Informe o nome">
+                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Informe o nome (obrigatório)" 
+                    title="Campo Obrigatório" required>
                 </div>
                 <div class="input-group my-3">
                     <input type="text" class="form-control" name="categoria" id="categoria"
-                        placeholder="Informe a categoria">
+                        placeholder="Informe a categoria (obrigatório)" required title="Campo Obrigatório">
                 </div>
                 <div class="input-group my-3">
-                    <input type="text" class="form-control" name="codigo" id="codigo" placeholder="Informe Código">
+                    <input type="text" class="form-control" name="codigo" id="codigo" placeholder="Informe o Código (obrigatório)" required title="Campo Obrigatório">
                 </div>
                 <div class="my-3">
                     <label for="local">Local:</label>

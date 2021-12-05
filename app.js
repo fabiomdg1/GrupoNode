@@ -118,8 +118,11 @@ app.get("/editarMedico/:id", (req, res) => {
         let perfilLogado = localStorage.getItem("perfilLogado")
         dbo.collection("medico").findOne({ _id: ObjectId(o_id) }, (err, resultado) => {
             if (err) throw err
-            res.render("editarMedico", { resultado, perfilLogado })
-        })
+            dbo.collection("especialidade").find({}).toArray((erro, espcs) => {
+                if (erro) throw erro
+                res.render("editarMedico", { resultado, perfilLogado, espcs})
+            })//pesquisa as especialidades cadastradas
+        })//pesquisando um medico
     }//else
 })//editarMedico
 
@@ -132,6 +135,7 @@ app.post('/editarMedico', (req, res) => {
         let obj = {
             nome: req.body.nome,
             crm: req.body.crm,
+            especialidade: req.body.especialidade,
             rg: req.body.rg,
             cpf: req.body.cpf,
             url: req.body.url,
@@ -207,7 +211,7 @@ app.post("/cadastrarMedico", (req, res) => {
             email: req.body.email,
             telefone: req.body.telefone,
             url: foto,
-            fo0o: req.body.formacao,
+            formacao: req.body.formacao,
             data_admissao: dataAdmissao
         }
         // pesquisar na especialidade pra incrementar
