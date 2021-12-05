@@ -1,9 +1,3 @@
-toda a estilização
-
-
-[+/-]
-navbars dinâmicas [colocar o login e o logoff colados a direita]
-
 [OK]
 contar a quantidade de medicos daquela especialidade [ok]
 atualizar a quantidade de medicos na especialidade mediante a criação de um novo medico [pqp, ok]
@@ -19,3 +13,5 @@ Vlibras
 definir os caminhos que levam a página de erro (revisar)
 arrumar a cor do menu sanduiche
 responsividade
+navbars dinâmicas [colocar o login e o logoff colados a direita]
+toda a estilização
