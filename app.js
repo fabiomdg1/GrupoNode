@@ -386,7 +386,11 @@ app.post('/buscaNome', (req, res) =>{
         if (resultado.length == 0){
             let vazio = true
             res.render('cardsMedicos', {vazio})
-        } else res.render('cardsMedicos', {medicos: resultado})
+        } else {
+            let perfilLogado = localStorage.getItem("perfilLogado")
+            res.render('cardsMedicos', {medicos: resultado, perfilLogado })
+        }
+        
     })
 })
 
@@ -397,7 +401,10 @@ app.post('/buscaEspecialidade', (req, res) =>{
         if (resultado.length == 0){
             let vazio = true
             res.render('cardsMedicos', {vazio})
-        } else res.render('cardsMedicos', {medicos: resultado})
+        } else{
+            let perfilLogado = localStorage.getItem("perfilLogado")
+            res.render('cardsMedicos', {medicos: resultado, perfilLogado})
+        } 
     })
 })
 
