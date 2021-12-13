@@ -1,23 +1,38 @@
-<h1>Editar Especialidades</h1>
-<div class="container">
-    <div class="row">
+<head>
+    
+    <link rel="stylesheet" href="/css/estilo.css">
+    
+</head>
+
+{{>navBarAdm}}
+
+<script>
+    document.querySelector("img").src = "/img/logo.png"
+    document.querySelector("link[rel*='icon']").href = "/img/icon.png";
+</script>
+
+<h3 class="text-center mt-2 titulo">Editar Especialidades</h3>
+<div class="container ">
+    <div class="row mb-1 h-100 justify-content-center">
         <div class="col-lg-6">
             <form action="/editarEspecialidade" class="form-group" method="post">
-            {{!-- puxa o objeto Id para fazer a edição na rotina editarespecialidade no app --}}
-            <input type="hidden" name="id" value="{{especialidade._id}}">
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite o nome" value="{{especialidade.nome}}">
+                {{!-- puxa o objeto Id para fazer a edição na rotina editarespecialidade no app --}}
+                <input type="hidden" name="id" value="{{especialidade._id}}">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite o nome (obrigatório)" required title="Campo Obrigatório"
+                        value="{{especialidade.nome}}">
                 </div>
-                <div class="input-group mb-2">
+                <div class="input-group mb-3">
                     <input type="text" class="form-control" name="categoria" id="categoria"
-                        placeholder="Digite a categoria" value="{{especialidade.categoria}}">
+                        placeholder="Digite a categoria (obrigatório)" required title="Campo Obrigatório" value="{{especialidade.categoria}}">
                 </div>
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control" name="codigo" id="codigo" placeholder="Código" value="{{especialidade.codigo}}">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="codigo" id="codigo" placeholder="informe o Código (obrigatório)" required title="Campo Obrigatório"
+                        value="{{especialidade.codigo}}">
                 </div>
                 <div>
                     <label for="local">Local</label>
-                    <div class="form-check form-check-inline">
+                    <div class="form-check form-check-inline mx-3">
                         <input class="form-check-input" type="radio" name="local" id="local1" value="clinica" checked>
                         <label class="form-check-label" for="local1">Clínica</label>
                     </div>
@@ -26,20 +41,33 @@
                         <label class="form-check-label" for="local2">Consultório</label>
                     </div>
                 </div>
-                <div>
+                <div class="my-3">
                     <label for="planoSaude">Plano de Saúde</label>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="planoSaude" id="planoSaude1" value="sim" checked>
+                    <div class="form-check form-check-inline mx-3">
+                        <input class="form-check-input" type="radio" name="planoSaude" id="planoSaude1" value="sim"
+                            checked>
                         <label class="form-check-label" for="planoSaude1">Sim</label>
                     </div>
-                    <div class="form-check form-check-inline">
+                    <div class="form-check form-check-inline mx-3">
                         <input class="form-check-input" type="radio" name="planoSaude" id="planoSaude2" value="nao">
                         <label class="form-check-label" for="planoSaude2">Não</label>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-success">Enviar</button>
-                <button type="reset" class="btn btn-danger">Limpar</button>
+                <div class="col mt-3 text-end">
+                    <button type="submit" class="btn btnAdm">Enviar</button>
+                    <button type="reset" class="btn clearAdm">Limpar</button>
+                </div>
             </form> {{!-- form --}}
         </div> {{!-- col --}}
     </div> {{!-- row --}}
 </div> {{!-- container --}}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+</script>
+<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+
+<script src="/js/editar.js"></script>

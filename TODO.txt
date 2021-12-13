@@ -1,15 +1,6 @@
-criar cards dos medicos
-listar medicos pro usuario
-    pesquisa por medico
-    pesquisa por especialidade
-toda a estilização
-Vlibras
-estilizar pagina de erro
-    definir os caminhos que levam a ela
-colocar img no banco
-
-[+/-]
-navbars dinâmicas [funfou, só falta deixar bonitin]
+!
+reeincrementar o numero de médicos quando a especialidade do médico for trocada
+inconsistencia no banco caso especialidades sejam apagadas
 
 [OK]
 contar a quantidade de medicos daquela especialidade [ok]
@@ -18,3 +9,13 @@ select da especialidade no cadastrar medico (puxar do banco) [ok]
 fazer logoff
 restringir o user pra voltar pro login já estando logado
 sem footer no adm (só há footer para a parte de user)
+criar cards dos medicos [OK]
+listar medicos pro usuario
+    pesquisa por medico
+    pesquisa por especialidade[OK]
+Vlibras
+definir os caminhos que levam a página de erro (revisar)
+arrumar a cor do menu sanduiche
+responsividade
+navbars dinâmicas [colocar o login e o logoff colados a direita]
+toda a estilização

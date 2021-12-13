@@ -1,14 +1,29 @@
-*{
-    margin: 0;
-    padding: 0;
+ @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100&display=swap');
+* {
+  font-family: 'roboto';
+   margin: 0;
+   padding: 0;
 }
 .navbar{
-    background-color: #1F2B6C!important;
+    background-color: #688ede!important;
     color: white;
+}
+
+.navbarAdm{
+    background-color: lightseagreen!important;
+    color: black;
 }
 
 .footer{
     justify-content: space-between;  
+}
+
+.tituloUser{
+    color:#1D438A;
+}
+
+.cardsM{
+    min-height: 60vh;
 }
 
 .loginContainer{
@@ -22,17 +37,30 @@
 .login{
     position: relative;
     margin-left: auto;
-    color: #1F2B6C;
-    width: 35%;
+    color: #688ede;
+    width: 45%;
     box-shadow: 0 0 1.8rem rgb(0 0 0 / 15%);
     border-radius: 10px;
     padding: 50px;
-    height: 75vh;
+    height: 450px;
+}
+
+@media(max-width:820px){
+    .login{
+        margin-left: 0;
+        padding: 2;
+        width: 70%;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+    }
 }
 
 .login input{
     background-color: rgba(255, 255, 255, .3);
-    border: 1px solid #1F2B6C;
+    
+    /* border: 1px solid #688ede; */
 }
 
 .login input:hover{
@@ -43,23 +71,93 @@
     width: 50px;
 }
 
-.btn{
-    background-color: #1F2B6C;
+.btnLogin:hover{
+    background-color: white;
+}
+
+.btnUser{
+    background-color: #688ede;
     color: white;
 }
 
-.btn:hover{
-    box-shadow:2px 2px 2px 2px#1F2B6C;
+.btnUser:hover{
+    box-shadow:2px 2px 2px 2px#688ede;
     background-color: white ;
+    color: #0960e0;
+}
+
+.btnAdm:hover,.clearAdm:hover{
+    box-shadow:2px 2px 2px 2px lightseagreen;
+    background-color: white!important ;
+    color: lightseagreen;
+}
+
+.btnAdm{
+    background-color: lightseagreen!important;
+    color: white;
+}
+
+.clearUser{
+    border: 1px #1F2B6C solid;
+    background-color: white;
     color: #1F2B6C;
 }
 
-.navbar a{
+.clearAdm{
+    border: 1px lightseagreen solid;
+    background-color: white!important;
+    color: lightseagreen;
+}
+
+.click, .navbar a{
     color: white!important;
     font-size: 18px;
+}
+.click:hover{
+    color: white!important;
+    /* font-size: 19px; */
+    text-decoration: underline;
 }
 
 .cardsM{
     min-width: 75vh;
-   
 }
+
+.titulo{
+    color: rgb(16, 105, 101);
+}
+
+.listaContainer{
+    box-shadow: 0 0 7px rgb(0 0 0 / 15%);
+}
+
+.cardContainer{
+    box-shadow: 0 0 8px rgb(0 0 0 / 15%);
+}
+
+.card-body{
+    /* background-color: #BFD2F8; */
+    color: #1D438A;
+}
+
+.modal-header{
+    /* background-color: #688ede; */
+    color: #1D438A;
+}
+
+.modal{
+    font-size: 20px;
+    /* background: url("/img/banneruser.png"); */
+}
+
+.modal-body{
+    background: url("/img/modal-imagem.jpg"); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #17356E;
+}
+
+.btn-close{
+    color: #17356E;
+}
+

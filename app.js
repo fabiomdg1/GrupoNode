@@ -41,6 +41,24 @@ app.use(express.static(__dirname + "/public"))
 localStorage.setItem("perfilLogado", "nulo")
 localStorage.setItem("tipoPerfil", "nulo")
 
+// Rota inicial direcionando para pagina de login
+app.get("/", (req, res) => {
+    let tipoPerfil = localStorage.getItem("tipoPerfil")
+    let x = localStorage.getItem("perfilLogado")
+    if(tipoPerfil == "user"){
+        // ele já está logado como user
+        res.redirect("/cardsMedicos")
+    }else if(tipoPerfil == "adm"){
+        // ele já está logado como adm
+        res.redirect("/listarMedico")
+    }else{
+        // ele não está logado
+        res.render("login")
+    }
+})
+//Fim rota inidial /
+
+
 app.get("/login", (req, res) => {
     let tipoPerfil = localStorage.getItem("tipoPerfil")
     let x = localStorage.getItem("perfilLogado")
@@ -62,16 +80,6 @@ app.get("/logoff", (req, res) => {
     res.redirect("/login")
 })
 
-// app.get("/cardsMedicos", (req, res) => {
-//     let tipoPerfil = localStorage.getItem("tipoPerfil")
-//     if(tipoPerfil == "nulo"){
-//         res.render("erro")
-//     }else{
-//         let x = localStorage.getItem("perfilLogado")
-//         res.render("cardsMedicos", {x})
-//     }
-// })
-
 app.post("/login", (req, res) => {
     let login = req.body.login
     let senha = req.body.senha
@@ -81,7 +89,7 @@ app.post("/login", (req, res) => {
         console.log(resultado)
         if(resultado == null){
             // não achamos o login
-            res.send("Não achamos seu login")
+            res.render("erroSenha")
         }else if(senha == resultado.senha){
             // senha correta
             // usando o local storage para armazenar informações do perfil logado no sistema
@@ -94,10 +102,9 @@ app.post("/login", (req, res) => {
                 // logou como adm, vai pro dashboard
                 res.redirect("/listarMedico")
             }
-            
         }else{
             // senha errada
-            res.send("Senha incorreta")
+            res.render("erroSenha")
         }
     })
 })
@@ -108,11 +115,14 @@ app.get("/editarMedico/:id", (req, res) => {
         res.render("erro")
     }else{
         var o_id = req.params.id
-
+        let perfilLogado = localStorage.getItem("perfilLogado")
         dbo.collection("medico").findOne({ _id: ObjectId(o_id) }, (err, resultado) => {
             if (err) throw err
-            res.render("editarMedico", { resultado })
-        })
+            dbo.collection("especialidade").find({}).toArray((erro, espcs) => {
+                if (erro) throw erro
+                res.render("editarMedico", { resultado, perfilLogado, espcs})
+            })//pesquisa as especialidades cadastradas
+        })//pesquisando um medico
     }//else
 })//editarMedico
 
@@ -125,8 +135,10 @@ app.post('/editarMedico', (req, res) => {
         let obj = {
             nome: req.body.nome,
             crm: req.body.crm,
+            especialidade: req.body.especialidade,
             rg: req.body.rg,
             cpf: req.body.cpf,
+            url: req.body.url,
             email: req.body.email,
             telefone: req.body.telefone,
             formacao: req.body.formacao
@@ -152,8 +164,9 @@ app.get("/cadastrarMedico", (req, res) => {
     if(tipoPerfil == "user" || tipoPerfil == "nulo"){
         res.render("erro")
     }else{
+        let perfilLogado = localStorage.getItem("perfilLogado")
         dbo.collection("especialidade").find({}).toArray((erro, result) => {
-            res.render("cadastrarMedico", {especialidades:result})
+            res.render("cadastrarMedico", {especialidades:result, perfilLogado})
         })
     }//else
 })//cadastrarMedico
@@ -163,9 +176,10 @@ app.get("/listarMedico", (req, res) => {
     if(tipoPerfil == "user" || tipoPerfil == "nulo"){
         res.render("erro")
     }else{
+        let perfilLogado = localStorage.getItem("perfilLogado")
         dbo.collection('medico').find({}).toArray((err, resultado) => {
             if (err) throw err
-            res.render("listaMedico", { medicos: resultado })
+            res.render("listaMedico", { medicos: resultado, perfilLogado })
         })
     }//else
 })//listarMedico
@@ -181,6 +195,13 @@ app.post("/cadastrarMedico", (req, res) => {
         const now = new Date();
         let dataAdmissao = date.format(now, "DD/MM/YYYY")
 
+        let foto = ""
+        if(req.body.url == ""){
+            foto = "https://cdn.discordapp.com/attachments/913575824542814208/916791920297123941/Avatar.png"
+        }else{
+            foto = req.body.url
+        }
+
         let obj = {
             nome: req.body.nome,
             crm: req.body.crm,
@@ -189,8 +210,8 @@ app.post("/cadastrarMedico", (req, res) => {
             cpf: req.body.cpf,
             email: req.body.email,
             telefone: req.body.telefone,
-            url: req.body.url,
-            fo0o: req.body.formacao,
+            url: foto,
+            formacao: req.body.formacao,
             data_admissao: dataAdmissao
         }
         // pesquisar na especialidade pra incrementar
@@ -230,7 +251,8 @@ app.get("/cadastrarEspecialidade", (req, res) => {
     if(tipoPerfil == "user" || tipoPerfil == "nulo"){
         res.render("erro")
     }else{
-        res.render("cadastrarEspecialidade")
+        let perfilLogado = localStorage.getItem("perfilLogado")
+        res.render("cadastrarEspecialidade", {perfilLogado})
     }//else
 })//cadastrarEspecialidade
 
@@ -270,9 +292,10 @@ app.get('/listarEspecialidade', (req, res) => {
     if(tipoPerfil == "user" || tipoPerfil == "nulo"){
         res.render("erro")
     }else{
+        let perfilLogado = localStorage.getItem("perfilLogado")
         dbo.collection('especialidade').find({}).toArray((erro, resultado) => {
             if (erro) throw erro
-            res.render('listarEspecialidade', { especialidades: resultado })
+            res.render('listarEspecialidade', { especialidades: resultado, perfilLogado })
         })
     }//else
 })//listarEspecialidade
@@ -297,9 +320,10 @@ app.get('/editarEspecialidade/:id', (req, res) => {
         res.render("erro")
     }else{
         let o_id = req.params.id
+        let perfilLogado = localStorage.getItem("perfilLogado")
         dbo.collection('especialidade').findOne({ _id: ObjectId(o_id) }, (erro, resultado) => {
             if (erro) throw erro
-            res.render('editarEspecialidade', { especialidade: resultado })
+            res.render('editarEspecialidade', { especialidade: resultado, perfilLogado })
         })
     }//else
 })//editarEspecialidade
@@ -332,9 +356,10 @@ app.get("/listarMedico", (req, res) => {
     if(tipoPerfil == "user" || tipoPerfil == "nulo"){
         res.render("erro")
     }else{
+        let perfilLogado = localStorage.getItem("perfilLogado")
         dbo.collection('medico').find({}).toArray((err, resultado) => {
             if (err) throw err
-            res.render("listaMedico", { medicos: resultado })
+            res.render("listaMedico", { medicos: resultado, perfilLogado })
         })
     }//else
 })//listarMedico
@@ -344,9 +369,11 @@ app.get("/cardsMedicos", (req, res) => {
     if(tipoPerfil == "nulo"){
         res.render("erro")
     }else{
+        let perfilLogado = localStorage.getItem("perfilLogado")
+
         dbo.collection("medico").find({}).toArray((err, resultado) => {
             if (err) throw err
-            res.render("cardsMedicos", { medicos: resultado })
+            res.render("cardsMedicos", { medicos: resultado, perfilLogado })
         })
     }//else
 })//listarMedico
@@ -359,7 +386,11 @@ app.post('/buscaNome', (req, res) =>{
         if (resultado.length == 0){
             let vazio = true
             res.render('cardsMedicos', {vazio})
-        } else res.render('cardsMedicos', {medicos: resultado})
+        } else {
+            let perfilLogado = localStorage.getItem("perfilLogado")
+            res.render('cardsMedicos', {medicos: resultado, perfilLogado })
+        }
+        
     })
 })
 
@@ -370,7 +401,10 @@ app.post('/buscaEspecialidade', (req, res) =>{
         if (resultado.length == 0){
             let vazio = true
             res.render('cardsMedicos', {vazio})
-        } else res.render('cardsMedicos', {medicos: resultado})
+        } else{
+            let perfilLogado = localStorage.getItem("perfilLogado")
+            res.render('cardsMedicos', {medicos: resultado, perfilLogado})
+        } 
     })
 })
 
